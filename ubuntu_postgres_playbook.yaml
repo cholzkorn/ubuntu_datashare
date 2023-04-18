@@ -4,28 +4,24 @@
 
   tasks:
     - name: Install PostgreSQL server package
-      apt:
-        name: postgresql-14
-        state: latest
-        force: yes
+      dpkg:
+        deb: https://www.postgresql.org/media/keys/ACCC4CF8.asc
         update_cache: yes
+        package: postgresql-14
+        force: yes
         force_confnew: yes
 
     - name: Install Python3
       apt:
         name: python3
         state: latest
-        force: yes
         update_cache: yes
-        force_confnew: yes
 
     - name: Install psycopg2 package
       apt:
         name: python3-psycopg2
         state: latest
-        force: yes
         update_cache: yes
-        force_confnew: yes
 
     - name: Stop PostgreSQL service
       systemd:
