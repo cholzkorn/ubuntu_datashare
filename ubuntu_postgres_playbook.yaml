@@ -47,7 +47,7 @@
     - name: Create PostgreSQL schemas
       postgresql_query:
         login_user: postgres
-        login_password: mysecretpassword
+        login_password: clem1234
         db: postgres
         query: "CREATE SCHEMA IF NOT EXISTS ENERGY; CREATE SCHEMA IF NOT EXISTS PASST; CREATE SCHEMA IF NOT EXISTS NETWORK;"
 
