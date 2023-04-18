@@ -1,4 +1,4 @@
-- name: Install PostgreSQL and create schemas
+- name: Install PostgreSQL and configure
   hosts: all
   become: yes
 
@@ -51,13 +51,6 @@
       wait_for:
         port: 5432
         timeout: 60
-
-    - name: Create PostgreSQL schemas
-      postgresql_query:
-        login_user: postgres
-        login_password: clem1234
-        db: postgres
-        query: "CREATE SCHEMA IF NOT EXISTS ENERGY; CREATE SCHEMA IF NOT EXISTS PASST; CREATE SCHEMA IF NOT EXISTS NETWORK;"
 
     - name: Allow remote access to PostgreSQL
       lineinfile:
