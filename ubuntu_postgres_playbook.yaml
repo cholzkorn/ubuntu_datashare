@@ -71,7 +71,7 @@
       notify: restart postgresql
 
   handlers:
-    - name: Restart PostgreSQL service
+    - name: restart postgresql
       systemd:
         name: postgresql
         state: restarted
