@@ -5,17 +5,17 @@
   tasks:
     - name: Install PostgreSQL server package
       apt:
-        name: postgresql-13
+        name: postgresql
         state: latest
 
     - name: Initialize PostgreSQL database
-      shell: pg_createcluster 13 main --start
+      shell: pg_createcluster 15 main --start
       become_user: postgres
       become: yes
 
     - name: Start PostgreSQL service and enable it on boot
       systemd:
-        name: postgresql@13-main
+        name: postgresql@15-main
         state: started
         enabled: yes
 
@@ -28,7 +28,7 @@
 
     - name: Allow remote access to PostgreSQL
       lineinfile:
-        dest: /etc/postgresql/13/main/pg_hba.conf
+        dest: /etc/postgresql/15/main/pg_hba.conf
         line: "host    all             all             0.0.0.0/0            md5"
         insertafter: "^# TYPE DATABASE USER"
         state: present
@@ -37,7 +37,7 @@
 
     - name: Update PostgreSQL configuration
       lineinfile:
-        dest: /etc/postgresql/13/main/postgresql.conf
+        dest: /etc/postgresql/15/main/postgresql.conf
         regexp: "^#?listen_addresses = 'localhost'$"
         line: "listen_addresses = '*'"
         state: present
@@ -47,5 +47,5 @@
   handlers:
     - name: Restart PostgreSQL service
       systemd:
-        name: postgresql@13-main
+        name: postgresql@15-main
         state: restarted
