@@ -28,6 +28,14 @@
       become_user: postgres
       become: yes
 
+    - name: Set correct file permissions
+      file:
+        path: /var/lib/postgresql/14/main/
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0700
+
     - name: Initialize PostgreSQL database
       shell: pg_createcluster 14 main --start
       become_user: postgres
