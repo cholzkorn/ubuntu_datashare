@@ -8,8 +8,18 @@
         name: postgresql-14
         state: latest
 
+    - name: Stop PostgreSQL service
+      systemd:
+        name: postgresql
+        state: stopped
+
+    - name: Remove PostgreSQL cluster
+      shell: pg_dropcluster 14 main --stop
+      become_user: postgres
+      become: yes
+
     - name: Initialize PostgreSQL database
-      shell: pg_createcluster 14 main --start --force
+      shell: pg_createcluster 14 main --start
       become_user: postgres
       become: yes
 
