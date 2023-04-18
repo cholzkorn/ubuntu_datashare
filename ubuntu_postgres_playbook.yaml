@@ -5,7 +5,7 @@
   tasks:
     - name: Install PostgreSQL server package
       apt:
-        name: postgresql
+        name: postgresql-13
         state: latest
 
     - name: Initialize PostgreSQL database
@@ -15,7 +15,7 @@
 
     - name: Start PostgreSQL service and enable it on boot
       systemd:
-        name: postgresql
+        name: postgresql@13-main
         state: started
         enabled: yes
 
@@ -47,6 +47,5 @@
   handlers:
     - name: Restart PostgreSQL service
       systemd:
-        name: postgresql
+        name: postgresql@13-main
         state: restarted
-
